@@ -1,0 +1,48 @@
+﻿<Application x:Class="Grimoire_Tactica_Card_Generator.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Grimoire_Tactica_Card_Generator"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <!--Styling to make the system not burn peoples eyes out-->
+        <!--Start With Darkening The Window Grid Itself-->
+        <Style TargetType="Grid">
+            <Setter Property="Background" Value="#FF1F1F1F"/>
+        </Style>
+        <!--And Buttons, we have a few of those-->
+        <Style TargetType="Button">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Background" Value="DimGray"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style TargetType="{x:Type Window}">
+            <Setter Property="FontFamily" Value="Trebuchet MS" />
+            <Setter Property="Foreground" Value="White"/>            
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="DimGray"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style TargetType="ListView">
+            <Setter Property="Background" Value="DimGray"/>
+        </Style>
+        <Style TargetType="ListViewItem">
+            <Setter Property="Background" Value="Gray"/>
+        </Style>
+        <Style TargetType="StackPanel">
+            <Setter Property="Background" Value="DarkGray"/>
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="Background" Value="DarkGray"/>
+        </Style>
+        <Style TargetType="ComboBoxItem">
+            <Setter Property="Background" Value="DarkGray"/>
+            <Setter Property="FontFamily" Value="Trebuchet MS"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style TargetType="TextBlock">            
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+    </Application.Resources>
+</Application>

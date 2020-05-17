@@ -1,0 +1,100 @@
+﻿<Window x:Class="Grimoire_Tactica_Card_Generator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Grimoire_Tactica_Card_Generator"
+        mc:Ignorable="d"
+        Title="Tactica Grimoire Card Generator" Height="900" Width="1600" Loaded="Window_Loaded" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <!--Grid Setup-->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.05*"/>
+            <ColumnDefinition Width="1.25*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0.25*"/>
+            <ColumnDefinition Width="0.25*"/>
+            <ColumnDefinition Width="0.25*"/>
+            <ColumnDefinition Width="0.05*"/>
+        </Grid.ColumnDefinitions>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.25*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.25*"/>
+        </Grid.RowDefinitions>
+        
+        <!--The Selectors for Set and Cards, as well as associated buttons for adding and removing the aforementioned as well as saving-->
+        <ComboBox x:Name="CMB_Set_Selector" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="1" SelectionChanged="CMB_Set_Selector_SelectionChanged"/>
+        <Button x:Name="BTN_Add_Set" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="1" Grid.RowSpan="1" Content="New Set" Click="BTN_Add_Set_Click"/>
+        <Button x:Name="BTN_Delete_Set" Grid.Column="4" Grid.Row="1" Grid.ColumnSpan="1" Grid.RowSpan="1" Content="Delete Set" Height="26" VerticalAlignment="Top" Click="BTN_Delete_Set_Click"/>
+        <Button x:Name="BTN_Save_Set" Grid.Column="5" Grid.Row="1" Grid.ColumnSpan="1" Grid.RowSpan="1" Content="Save Set" Click="BTN_Save_Set_Click"/>
+        <ComboBox x:Name="CMB_Card_Selector" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Grid.RowSpan="1" SelectionChanged="CMB_Card_Selector_SelectionChanged"/>
+        <Button x:Name="BTN_Add_Card" Grid.Column="3" Grid.Row="2" Grid.ColumnSpan="1" Grid.RowSpan="1" Content="New Card" Click="BTN_Add_Card_Click"/>
+        <Button x:Name="BTN_Delete_Card" Grid.Column="4" Grid.Row="2" Grid.ColumnSpan="1" Grid.RowSpan="1" Content="Delete Card" Click="BTN_Delete_Card_Click"/>
+        <Button x:Name="BTN_Save_Card" Grid.Column="5" Grid.Row="2" Grid.ColumnSpan="1" Grid.RowSpan="1" Content="Save Card" Click="BTN_Save_Card_Click"/>
+
+        <!--The Image frame for the card preview Need to make sure it rounds the values so to get better appearance-->
+        <Image x:Name="IMG_Card_Preview" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="1" Grid.RowSpan="14" HorizontalAlignment="Center" VerticalAlignment="Center" UseLayoutRounding="True"/>
+        
+        <!--These are the TextBoxes that will hold all the data fields of the card-->
+        <!--First is the cards name and title-->
+        <TextBox x:Name="TBX_Card_Name" Grid.Column="2" Grid.Row="3" Grid.ColumnSpan="3" Grid.RowSpan="1" Text="Name" AutomationProperties.HelpText="The Cards Name"/>
+        <TextBlock x:Name="TBL_Name" Grid.Column="5" Grid.Row="3" Grid.ColumnSpan="1" Grid.RowSpan="1" Text="Name" Foreground="#FFC5C5C5"/>
+        <TextBox x:Name="TBX_Card_Title" Grid.Column="2" Grid.Row="4" Grid.ColumnSpan="3" Grid.RowSpan="1" Text="Title" AutomationProperties.HelpText="The Cards Title"/>
+        <TextBlock x:Name="TBL_Title" Grid.Column="5" Grid.Row="4" Grid.ColumnSpan="1" Grid.RowSpan="1" Text="Title" Foreground="#FFC5C5C5"/>
+        
+        <!--Cost and other numeric fields-->
+        <TextBox x:Name="TBX_Card_Cost" Grid.Column="2" Grid.Row="5" Grid.ColumnSpan="3" Grid.RowSpan="1" Text="Cost" AutomationProperties.HelpText="The Resource Cost Of The Card"/>
+        <TextBlock x:Name="TBL_Cost" Grid.Column="5" Grid.Row="5" Grid.ColumnSpan="1" Grid.RowSpan="1" Text="Resource Cost" Foreground="#FFC5C5C5"/>
+        <TextBox x:Name="TBX_Card_HP" Grid.Column="2" Grid.Row="6" Grid.ColumnSpan="3" Grid.RowSpan="1" Text="HP" AutomationProperties.HelpText="The Cards HP value if any"/>
+        <TextBlock x:Name="TBL_HP" Grid.Column="5" Grid.Row="6" Grid.ColumnSpan="1" Grid.RowSpan="1" Text="HP" Foreground="#FFC5C5C5"/>
+        <TextBox x:Name="TBX_Card_ATK" Grid.Column="2" Grid.Row="7" Grid.ColumnSpan="3" Grid.RowSpan="1" Text="ATK" AutomationProperties.HelpText="The Cards Attack Value, If Any"/>
+        <TextBlock x:Name="TBL_ATK" Grid.Column="5" Grid.Row="7" Grid.ColumnSpan="1" Grid.RowSpan="1" Text="ATK" Foreground="#FFC5C5C5"/>
+        <TextBox x:Name="TBX_Card_DEF" Grid.Column="2" Grid.Row="8" Grid.ColumnSpan="3" Grid.RowSpan="1" Text="DEF" AutomationProperties.HelpText="The Cards DEF Vale, If Any."/>
+        <TextBlock x:Name="TBL_DEF" Grid.Column="5" Grid.Row="8" Grid.ColumnSpan="1" Grid.RowSpan="1" Text="DEF" Foreground="#FFC5C5C5"/>
+        
+        <!--Keywords and other defining traits of the card-->
+        <TextBox x:Name="TBX_Card_Skills" Grid.Column="2" Grid.Row="9" Grid.ColumnSpan="3" Grid.RowSpan="1" Text="Skills" AutomationProperties.HelpText="Skill Icons For This Card, Seperated By Commas"/>
+        <TextBlock x:Name="TBL_Skills" Grid.Column="5" Grid.Row="9" Grid.ColumnSpan="1" Grid.RowSpan="1" Text="Icons" Foreground="#FFC5C5C5"/>
+        <TextBox x:Name="TBX_Card_Keywords" Grid.Column="2" Grid.Row="10" Grid.ColumnSpan="3" Grid.RowSpan="1" Text="Keywords" AutomationProperties.HelpText="Keywords for the card, seperated by Commas"/>
+        <TextBlock x:Name="TBL_Keywords" Grid.Column="5" Grid.Row="10" Grid.ColumnSpan="1" Grid.RowSpan="1" Text="Keywords" Foreground="#FFC5C5C5"/>
+        
+        <!--Abilities need to be stored in a ListView as there may be a variable number of them wrapped in a scroll viewer for convenience-->
+        <ScrollViewer Grid.Column="2" Grid.Row="11" Grid.ColumnSpan="3" Grid.RowSpan="2">
+            <ListView x:Name="LIV_Abilities"/>
+        </ScrollViewer>
+        <Button x:Name="BTN_Add_Ability" Grid.Column="5" Grid.Row="11" Grid.ColumnSpan="1" Grid.RowSpan="1" Content="Add Ability" Click="BTN_Add_Ability_Click"/>
+        <Button x:Name="BTN_Delete_Ability" Grid.Column="5" Grid.Row="12" Grid.ColumnSpan="1" Grid.RowSpan="1" Content="Delete Ability" Click="BTN_Delete_Ability_Click"/>
+
+        <!--Lastly the Textboxes for flavour text, as well as URIs for artwork and the artist signiture-->
+        <TextBox x:Name="TBX_Flavour_Text" Grid.Column="2" Grid.Row="13" Grid.ColumnSpan="3" Grid.RowSpan="1" Text="Flavour Text" AutomationProperties.HelpText="A Cards Flavour Text"/>
+        <TextBlock x:Name="TBL_Flavour" Grid.Column="5" Grid.Row="13" Grid.ColumnSpan="1" Grid.RowSpan="1" Text="Flavour Text" Foreground="#FFC5C5C5"/>
+        
+        <!--For convenience the URI boxes will have buttons to trigger file dialogues for easier file path discovery-->
+        <TextBox x:Name="TBX_Artist_Signature_Path" Grid.Column="2" Grid.Row="14" Grid.ColumnSpan="3" Grid.RowSpan="1" Text="Relative Path To Artist Signature" AutomationProperties.HelpText="The Path To The Signature Image Of The Artist For The Card Art"/>
+        <Button x:Name="BTN_Artist_Signature_Path_Finder" Grid.Column="5" Grid.Row="14" Grid.ColumnSpan="1" Grid.RowSpan="1" Content="Search Signature" Click="BTN_Artist_Signature_Path_Finder_Click"/>
+        <TextBox x:Name="TBX_Artwork_Path" Grid.Column="2" Grid.Row="15" Grid.ColumnSpan="3" Grid.RowSpan="1" Text="Relative Path To Artwork File" AutomationProperties.HelpText="The Path To The Artwork Image File"/>
+        <Button x:Name="BTN_Art_Path_Finder" Grid.Column="5" Grid.Row="15" Grid.ColumnSpan="1" Grid.RowSpan="1" Content="Search Artwork" Click="BTN_Art_Path_Finder_Click"/>
+        
+        <!--Lastly Buttons to preview the card as well as export the entire set as either bleed or cropped cards-->
+        <Button x:Name="BTN_Preview_Card" Grid.Column="2" Grid.Row="16" Grid.ColumnSpan="1" Grid.RowSpan="1" Content="Preview Card" Click="BTN_Preview_Card_Click"/>        
+        <Button x:Name="BTN_Export_Bleed_Set" Grid.Column="4" Grid.Row="16" Grid.ColumnSpan="1" Grid.RowSpan="1" Content="Export Bleed" Click="BTN_Export_Bleed_Set_Click"/>
+        <Button x:Name="BTN_Export_Cropped_Set" Grid.Column="5" Grid.Row="16" Grid.ColumnSpan="1" Grid.RowSpan="1" Content="Export Cropped" Click="BTN_Export_Cropped_Set_Click"/>
+    </Grid>
+</Window>
