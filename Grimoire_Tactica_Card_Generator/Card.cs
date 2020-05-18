@@ -16,10 +16,10 @@ namespace Grimoire_Tactica_Card_Generator
         //placeholder string for the correct format of an ability in the file should be in
         public const string ABILITY_FORMAT = "Title|Effect";
         //Constants for the size of a bleed and cropped card
-        public const int BLEED_X = 825;
-        public const int BLEED_Y = 1125;
-        public const int CROPPED_X = 750;
-        public const int CROPPED_Y = 1050;
+        public const int BLEED_X = 900;
+        public const int BLEED_Y = 1500;
+        public const int CROPPED_X = 825;
+        public const int CROPPED_Y = 1425;
         public const int ABILITY_WIDTH = 554;
         public const int ABILITY_HEIGHT = 260;
         //and the bottom right corner where the artists signature finishes so it can be right justified
