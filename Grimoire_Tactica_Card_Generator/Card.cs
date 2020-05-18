@@ -20,7 +20,7 @@ namespace Grimoire_Tactica_Card_Generator
         public const int BLEED_Y = 1500;
         public const int CROPPED_X = 825;
         public const int CROPPED_Y = 1425;
-        public const int ABILITY_WIDTH = 554;
+        public const int ABILITY_WIDTH = 554;//TODO change the size of the ability text box
         public const int ABILITY_HEIGHT = 260;
         //and the bottom right corner where the artists signature finishes so it can be right justified
         public const int Signature_X = 739;
