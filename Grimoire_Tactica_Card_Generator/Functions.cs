@@ -136,97 +136,97 @@ namespace Grimoire_Tactica_Card_Generator
                 case "Vanguard":
                     using(Bitmap b = new Bitmap(@".\Icons\Vanguard.png"))
                     {
-                        Overlay_Image(i, b, new Rectangle(124, 604, 60, 60));
+                        Overlay_Image(i, b, new Rectangle(121, 762, 75, 75));
                     }
                     break;
                 case "Support":
                     using (Bitmap b = new Bitmap(@".\Icons\Support.png"))
                     {
-                        Overlay_Image(i, b, new Rectangle(227, 604, 60, 60));
+                        Overlay_Image(i, b, new Rectangle(237, 762, 75, 75));
                     }
                     break;
                 case "Range":
                     using (Bitmap b = new Bitmap(@".\Icons\Range.png"))
                     {
-                        Overlay_Image(i, b, new Rectangle(330, 604, 60, 60));
+                        Overlay_Image(i, b, new Rectangle(353, 762, 75, 75));
                     }
                     break;
                 case "Flyer":
                     using (Bitmap b = new Bitmap(@".\Icons\Flyer.png"))
                     {
-                        Overlay_Image(i, b, new Rectangle(433, 604, 60, 60));
+                        Overlay_Image(i, b, new Rectangle(469, 762, 75, 75));
                     }
                     break;
                 case "Mage":
                     using (Bitmap b = new Bitmap(@".\Icons\Mage.png"))
                     {
-                        Overlay_Image(i, b, new Rectangle(536, 604, 60, 60));
+                        Overlay_Image(i, b, new Rectangle(585, 762, 75, 75));
                     }
                     break;
                 case "Psychic":
                     using (Bitmap b = new Bitmap(@".\Icons\Psychic.png"))
                     {
-                        Overlay_Image(i, b, new Rectangle(639, 604, 60, 60));
+                        Overlay_Image(i, b, new Rectangle(701, 762, 75, 75));
                     }
                     break;
                 case "Vehicle":
                     using (Bitmap b = new Bitmap(@".\Icons\Vehicle.png"))
                     {
-                        Overlay_Image(i, b, new Rectangle(639, 604, 60, 60));
+                        Overlay_Image(i, b, new Rectangle(701, 762, 75, 75));
                     }
                     break;
                 case "Accessory":
                     using (Bitmap b = new Bitmap(@".\Icons\Accessory.png"))
                     {
-                        Overlay_Image(i, b, new Rectangle(536, 604, 60, 60));
+                        Overlay_Image(i, b, new Rectangle(585, 762, 75, 75));
                     }
                     break;
                 case "Shield":
                     using (Bitmap b = new Bitmap(@".\Icons\Shield.png"))
                     {
-                        Overlay_Image(i, b, new Rectangle(433, 604, 60, 60));
+                        Overlay_Image(i, b, new Rectangle(469, 762, 75, 75));
                     }
                     break;
                 case "Weapon":
                     using (Bitmap b = new Bitmap(@".\Icons\Weapon.png"))
                     {
-                        Overlay_Image(i, b, new Rectangle(330, 604, 60, 60));
+                        Overlay_Image(i, b, new Rectangle(353, 762, 75, 75));
                     }
                     break;
                 case "Armour":
                     using (Bitmap b = new Bitmap(@".\Icons\Armour.png"))
                     {
-                        Overlay_Image(i, b, new Rectangle(227, 604, 60, 60));
+                        Overlay_Image(i, b, new Rectangle(237, 762, 75, 75));
                     }
                     break;
                 case "Helmet":
                     using (Bitmap b = new Bitmap(@".\Icons\Helmet.png"))
                     {
-                        Overlay_Image(i, b, new Rectangle(124, 604, 60, 60));
+                        Overlay_Image(i, b, new Rectangle(121, 762, 75, 75));
                     }
                     break;
                 case "Spell":
                     using (Bitmap b = new Bitmap(@".\Icons\Spell.png"))
                     {
-                        Overlay_Image(i, b, new Rectangle(330, 604, 60, 60));
+                        Overlay_Image(i, b, new Rectangle(353, 762, 75, 75));
                     }
                     break;
                 case "Psychopomp":
                     using (Bitmap b = new Bitmap(@".\Icons\PsychoPomp.png"))
                     {
-                        Overlay_Image(i, b, new Rectangle(433, 604, 60, 60));
+                        Overlay_Image(i, b, new Rectangle(469, 762, 75, 75));
                     }
                     break;
                 case "QuickPlay":
                     using (Bitmap b = new Bitmap(@".\Icons\QuickPlay.png"))
                     {
-                        Overlay_Image(i, b, new Rectangle(433, 604, 60, 60));
+                        Overlay_Image(i, b, new Rectangle(353, 762, 75, 75));
                     }
                     break;
                 case "Continuious":
                     using (Bitmap b = new Bitmap(@".\Icons\Continuious.png"))
                     {
-                        Overlay_Image(i, b, new Rectangle(330, 604, 60, 60));
+                        Overlay_Image(i, b, new Rectangle(469, 762, 75, 75));
                     }
                     break;
                 default:
