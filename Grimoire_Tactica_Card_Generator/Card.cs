@@ -20,11 +20,11 @@ namespace Grimoire_Tactica_Card_Generator
         public const int BLEED_Y = 1500;
         public const int CROPPED_X = 825;
         public const int CROPPED_Y = 1425;
-        public const int ABILITY_WIDTH = 554;//TODO change the size of the ability text box
-        public const int ABILITY_HEIGHT = 260;
+        public const int ABILITY_WIDTH = 629;
+        public const int ABILITY_HEIGHT = 365;
         //and the bottom right corner where the artists signature finishes so it can be right justified
-        public const int Signature_X = 739;
-        public const int Signature_Y = 1041;
+        public const int Signature_X = 814;
+        public const int Signature_Y = 1414;
         //Constants for the font families used on the cards
         public const string NAME_FONT = "Impact";
         public const string NUMBER_FONT = "Times New Roman";
@@ -51,7 +51,11 @@ namespace Grimoire_Tactica_Card_Generator
         //this is set at run time and so doesnt need to be stored in or read from a text file
         public int Index { get; set; }
 
-        //Constructors omitted since only a no-arg constructor is used and an argumented constructor would have a mile long paramter list
+        //Arged Constructors omitted since only a no-arg constructor is used and an argumented constructor would have a mile long paramter list
+        public Card()
+        {
+            this.Abilities = new List<string>();
+        }
 
         //Methods for the class
 
@@ -180,7 +184,7 @@ namespace Grimoire_Tactica_Card_Generator
                         using(Bitmap overlay = new Bitmap(@".\Overlays\Overlay.png"))
                         {
                             //draw the textboxes into place on the card
-                            canvas = Functions.Overlay_Image(canvas, overlay, new Rectangle(80, 80, 665, 965));
+                            canvas = Functions.Overlay_Image(canvas, overlay, new Rectangle(79, 79, 740, 1340));
                         }
                         //Next up we need to draw the icons in place, there can be more than 1 so we need to split the string up
                         //and draw every one that occurs
@@ -196,13 +200,13 @@ namespace Grimoire_Tactica_Card_Generator
                         //the abilities, which need extra processing any way, that are rich text
                         //May as well start from top left through to bottom right
                         //The rectangle the cost of the card appears in
-                        Rectangle Cost_Rectangle = new Rectangle(84, 84, 90, 90);
+                        Rectangle Cost_Rectangle = new Rectangle(84, 84, 140, 140);
                         canvas = Functions.Write_Text(canvas, c.Cost, Cost_Rectangle, true, Card.NUMBER_FONT, true, false);
                         //Rectangle for the main name of the card to appear in
-                        Rectangle Name_Rectangle = new Rectangle(204, 81, 504, 60);
+                        Rectangle Name_Rectangle = new Rectangle(254, 84, 540, 89);
                         canvas = Functions.Write_Text(canvas, c.Name, Name_Rectangle, true, Card.NAME_FONT, true, false);
                         //And the card title
-                        Rectangle Title_Rectangle = new Rectangle(204, 146, 504, 30);
+                        Rectangle Title_Rectangle = new Rectangle(254, 184, 540, 40);
                         //the title is written in the same font as the name just not as a bold
                         canvas = Functions.Write_Text(canvas, c.Title, Title_Rectangle, true, Card.NAME_FONT, false, false);
                         //keywords need a little processing to assemble the string we want to draw since it will be stored
@@ -216,18 +220,18 @@ namespace Grimoire_Tactica_Card_Generator
                             keywords += $"[{key.Trim()}] ";
                         }
                         //keywords is then what we write to the card, with the same font as numbers but not bolded
-                        Rectangle Keyword_Rectangle = new Rectangle(84, 670, 665, 40);
+                        Rectangle Keyword_Rectangle = new Rectangle(84, 845, 730, 65);
                         //and draw the keywords in 
                         canvas = Functions.Write_Text(canvas, keywords, Keyword_Rectangle, true, Card.NUMBER_FONT, false, false);
                         //HP, ATK and DEF all follow basically the same pattern, just the box they are in changes
-                        Rectangle HP_Rectangle = new Rectangle(84, 721, 90, 90);
+                        Rectangle HP_Rectangle = new Rectangle(84, 921, 90, 140);
                         canvas = Functions.Write_Text(canvas, c.HP, HP_Rectangle, true, Card.NUMBER_FONT, true, false);
-                        Rectangle ATK_Rectangle = new Rectangle(84, 822, 90, 90);
+                        Rectangle ATK_Rectangle = new Rectangle(84, 1072, 90, 140);
                         canvas = Functions.Write_Text(canvas, c.ATK, ATK_Rectangle, true, Card.NUMBER_FONT, true, false);
-                        Rectangle DEF_Rectangle = new Rectangle(84, 923, 90, 90);
+                        Rectangle DEF_Rectangle = new Rectangle(84, 1223, 90, 140);
                         canvas = Functions.Write_Text(canvas, c.DEF, DEF_Rectangle, true, Card.NUMBER_FONT, true, false);
                         //Abilities due to their varied number in a fixed box require a little bit it processing
-                        //the box is 554 pixels wide and 260 pixels tall and all the abilities need to fit into that
+                        //the box is ABILITY_WIDTH pixels wide and ABILITY_HEIGHT pixels tall and all the abilities need to fit into that
                         //Abilities also are split into a bolded title and a non bold body so those need to be drawn seperate
                         //No point wasting space on abilities that wont be drawn since they are invalid so we first need
                         //a count of abilities in the desired format as well as store these valid abilities for easier access
@@ -253,7 +257,7 @@ namespace Grimoire_Tactica_Card_Generator
                         int Ability_Body_Height = Ability_Box_Height - Ability_Title_Height;
                         //Since all of these need to be drawn to rectangles we need values to track where the top of the rectangles go
                         int Rect_X = 185;
-                        int Rect_Y = 721;
+                        int Rect_Y = 921;
                         //now draw each of these abilities 
                         foreach(string[] abil in Valid_Ability_List)
                         {
@@ -269,14 +273,14 @@ namespace Grimoire_Tactica_Card_Generator
                             Rect_Y += Ability_Body_Height;
                         }
                         //The flavourtext still needs to be written as wrapped rich text but since there will only ever be 1 body of it, drawing it is far simpler
-                        Rectangle Flavour_Rectangle = new Rectangle(Rect_X, 983, Card.ABILITY_WIDTH, 30);
+                        Rectangle Flavour_Rectangle = new Rectangle(Rect_X, 1289, Card.ABILITY_WIDTH, 75);
                         //Flavour Text has its own font and its always written itallic in a lighter shade to distinguish it
                         canvas = Functions.Write_Rich_Text(canvas, c.Flavour_Text, Flavour_Rectangle, Card.FLAVOUR_FONT, false, true, Brushes.DarkSlateGray);
                         //A small amount of work is needed to generate the string the identifies the card in the set
                         //since its a formatted version of the index + the string for the set ID passed as a parameter
                         //the index needs to be padded to be 
                         string Set_Code = $"{set}-{string.Format("{0:00000}", c.Index)}";
-                        Rectangle Code_Rectangle = new Rectangle(84, 1022, 200, 20);
+                        Rectangle Code_Rectangle = new Rectangle(84, 1374, 200, 20);
                         //the code gets its own font since monospacing is important
                         canvas = Functions.Write_Text(canvas, Set_Code, Code_Rectangle, false, Card.CODE_FONT, true, false);
                         //The last section is to draw on the little image of the artists signature is to be drawn in the bottom 
@@ -289,8 +293,8 @@ namespace Grimoire_Tactica_Card_Generator
                                 //this may be subject to change 
                                 //since the variable are used for basically the same purpose we can reuse Rect_X and Rect_Y
                                 //since they won't be used after this point
-                                Rect_X = Math.Min(sig.Width, 200);
-                                Rect_Y = Math.Min(sig.Height, 40);
+                                Rect_X = Math.Min(sig.Width, 300);
+                                Rect_Y = Math.Min(sig.Height, 75);
                                 //We then draw the signature onto this rectangle in such a way that
                                 //it is right justified to the box it would be drawn in
                                 canvas = Functions.Overlay_Image(canvas, sig, new Rectangle(Card.Signature_X - Rect_X, Card.Signature_Y - Rect_Y, Rect_X, Rect_Y));                                

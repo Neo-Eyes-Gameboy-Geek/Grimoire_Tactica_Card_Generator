@@ -269,7 +269,7 @@ namespace Grimoire_Tactica_Card_Generator
                             if (centered)
                             {
                                 format.Alignment = StringAlignment.Center;
-                                format.Alignment = StringAlignment.Center;
+                                format.LineAlignment = StringAlignment.Center;
                             }
                             //and draw the text into place
                             g.DrawString(s, f, Brushes.Black, r, format);
