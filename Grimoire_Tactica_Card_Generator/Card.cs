@@ -180,7 +180,7 @@ namespace Grimoire_Tactica_Card_Generator
                         using(Bitmap overlay = new Bitmap(@".\Overlays\Overlay.png"))
                         {
                             //draw the textboxes into place on the card
-                            canvas = Functions.Overlay_Image(canvas, overlay, new Rectangle(80, 80, 665, 965));
+                            canvas = Functions.Overlay_Image(canvas, overlay, new Rectangle(79, 79, 665, 965));
                         }
                         //Next up we need to draw the icons in place, there can be more than 1 so we need to split the string up
                         //and draw every one that occurs
