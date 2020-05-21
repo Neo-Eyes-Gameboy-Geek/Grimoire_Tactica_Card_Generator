@@ -26,11 +26,11 @@ namespace Grimoire_Tactica_Card_Generator
         public const int Signature_X = 814;
         public const int Signature_Y = 1414;
         //Constants for the font families used on the cards
-        public const string NAME_FONT = "Impact";
-        public const string NUMBER_FONT = "Times New Roman";
-        public const string ABILITY_FONT = "Segoe UI";
-        public const string FLAVOUR_FONT = "Comic Sans MS";
-        public const string CODE_FONT = "Courier";
+        public const string NAME_FONT = "Courier New";
+        public const string NUMBER_FONT = "Courier New";
+        public const string ABILITY_FONT = "Courier New";
+        public const string FLAVOUR_FONT = "Courier New";
+        public const string CODE_FONT = "Courier New";
         //Data Fields, All Strings for ease of use
         public string Name { get; set; }
         public string Title { get; set; }
