@@ -280,7 +280,7 @@ namespace Grimoire_Tactica_Card_Generator
                         //since its a formatted version of the index + the string for the set ID passed as a parameter
                         //the index needs to be padded to be 
                         string Set_Code = $"{set}-{string.Format("{0:00000}", c.Index)}";
-                        Rectangle Code_Rectangle = new Rectangle(84, 1374, 200, 20);
+                        Rectangle Code_Rectangle = new Rectangle(84, 1374, 300, 40);
                         //the code gets its own font since monospacing is important
                         canvas = Functions.Write_Text(canvas, Set_Code, Code_Rectangle, false, Card.CODE_FONT, true, false);
                         //The last section is to draw on the little image of the artists signature is to be drawn in the bottom 
