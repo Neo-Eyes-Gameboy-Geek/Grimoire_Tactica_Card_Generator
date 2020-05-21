@@ -220,13 +220,13 @@ namespace Grimoire_Tactica_Card_Generator
                 case "QuickPlay":
                     using (Bitmap b = new Bitmap(@".\Icons\QuickPlay.png"))
                     {
-                        Overlay_Image(i, b, new Rectangle(353, 762, 75, 75));
+                        Overlay_Image(i, b, new Rectangle(469, 762, 75, 75));
                     }
                     break;
                 case "Continuious":
                     using (Bitmap b = new Bitmap(@".\Icons\Continuious.png"))
                     {
-                        Overlay_Image(i, b, new Rectangle(469, 762, 75, 75));
+                        Overlay_Image(i, b, new Rectangle(353, 762, 75, 75));
                     }
                     break;
                 default:
