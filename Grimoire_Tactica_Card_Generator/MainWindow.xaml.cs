@@ -541,6 +541,7 @@ namespace Grimoire_Tactica_Card_Generator
             w.TBX_Flavour_Text.Text = card.Flavour_Text;
             w.TBX_Artist_Signature_Path.Text = card.Signature;
             w.TBX_Artwork_Path.Text = card.Artwork;
+            w.TBX_Rarity.Text = card.Rarity;
         }
 
         //Clear the data entry fields on a provided main window
@@ -561,6 +562,7 @@ namespace Grimoire_Tactica_Card_Generator
             w.TBX_Flavour_Text.Text = "";
             w.TBX_Artist_Signature_Path.Text = "";
             w.TBX_Artwork_Path.Text = "";
+            w.TBX_Rarity.Text = "";
         }
 
         //Update the Card object in the list from the textboxes on the screen
@@ -596,6 +598,7 @@ namespace Grimoire_Tactica_Card_Generator
                 c.Flavour_Text = w.TBX_Flavour_Text.Text;
                 c.Signature = w.TBX_Artist_Signature_Path.Text;
                 c.Artwork = w.TBX_Artwork_Path.Text;
+                c.Rarity = w.TBX_Rarity.Text;
                 //Oh and for sake of completeness update the name of the current card
                 ((ComboBoxItem)w.CMB_Card_Selector.SelectedItem).Content = $"{c.Name} {c.Title}";
             }

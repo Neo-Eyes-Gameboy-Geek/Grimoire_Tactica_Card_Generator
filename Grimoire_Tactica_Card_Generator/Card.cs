@@ -45,6 +45,8 @@ namespace Grimoire_Tactica_Card_Generator
         //These last 2 are file paths, to a signature from the artist and the artwork itself
         public string Signature { get; set; }
         public string Artwork { get; set; }
+        //and one for rarity, to affect the set list colour
+        public string Rarity { get; set; }
         //Lastly this is just the path to the text file this will all be stored in, this should in theory not change
         public FileInfo Text_File { get; set; }
         //An integer representing what order the card exists in in the set
@@ -144,6 +146,11 @@ namespace Grimoire_Tactica_Card_Generator
                         c.Artwork = s.ReadLine().Trim();
                     }
 
+                    if (!s.EndOfStream)
+                    {
+                        c.Rarity = s.ReadLine().Trim();
+                    }
+
                     //Lastly tie the fileinfo to the card for easier retreival later
                     c.Text_File = file;
                 }
@@ -197,14 +204,14 @@ namespace Grimoire_Tactica_Card_Generator
                         //May as well start from top left through to bottom right
                         //The rectangle the cost of the card appears in
                         Rectangle Cost_Rectangle = new Rectangle(84, 84, 90, 90);
-                        canvas = Functions.Write_Text(canvas, c.Cost, Cost_Rectangle, true, Card.NUMBER_FONT, true, false);
+                        canvas = Functions.Write_Text(canvas, c.Cost, Cost_Rectangle, true, Card.NUMBER_FONT, true, false, Brushes.Black);
                         //Rectangle for the main name of the card to appear in
                         Rectangle Name_Rectangle = new Rectangle(204, 81, 504, 60);
-                        canvas = Functions.Write_Text(canvas, c.Name, Name_Rectangle, true, Card.NAME_FONT, true, false);
+                        canvas = Functions.Write_Text(canvas, c.Name, Name_Rectangle, true, Card.NAME_FONT, true, false, Brushes.Black);
                         //And the card title
                         Rectangle Title_Rectangle = new Rectangle(204, 146, 504, 30);
                         //the title is written in the same font as the name just not as a bold
-                        canvas = Functions.Write_Text(canvas, c.Title, Title_Rectangle, true, Card.NAME_FONT, false, false);
+                        canvas = Functions.Write_Text(canvas, c.Title, Title_Rectangle, true, Card.NAME_FONT, false, false, Brushes.Black);
                         //keywords need a little processing to assemble the string we want to draw since it will be stored
                         //slightly more compactly that being drawn
                         //keywords are stored all together but compacted by a comma, we need that to become a space
@@ -218,14 +225,14 @@ namespace Grimoire_Tactica_Card_Generator
                         //keywords is then what we write to the card, with the same font as numbers but not bolded
                         Rectangle Keyword_Rectangle = new Rectangle(84, 670, 665, 40);
                         //and draw the keywords in 
-                        canvas = Functions.Write_Text(canvas, keywords, Keyword_Rectangle, true, Card.NUMBER_FONT, false, false);
+                        canvas = Functions.Write_Text(canvas, keywords, Keyword_Rectangle, true, Card.NUMBER_FONT, true, false, Brushes.Black);
                         //HP, ATK and DEF all follow basically the same pattern, just the box they are in changes
                         Rectangle HP_Rectangle = new Rectangle(84, 721, 90, 90);
-                        canvas = Functions.Write_Text(canvas, c.HP, HP_Rectangle, true, Card.NUMBER_FONT, true, false);
+                        canvas = Functions.Write_Text(canvas, c.HP, HP_Rectangle, true, Card.NUMBER_FONT, true, false, Brushes.Black);
                         Rectangle ATK_Rectangle = new Rectangle(84, 822, 90, 90);
-                        canvas = Functions.Write_Text(canvas, c.ATK, ATK_Rectangle, true, Card.NUMBER_FONT, true, false);
+                        canvas = Functions.Write_Text(canvas, c.ATK, ATK_Rectangle, true, Card.NUMBER_FONT, true, false, Brushes.Black);
                         Rectangle DEF_Rectangle = new Rectangle(84, 923, 90, 90);
-                        canvas = Functions.Write_Text(canvas, c.DEF, DEF_Rectangle, true, Card.NUMBER_FONT, true, false);
+                        canvas = Functions.Write_Text(canvas, c.DEF, DEF_Rectangle, true, Card.NUMBER_FONT, true, false, Brushes.Black);
                         //Abilities due to their varied number in a fixed box require a little bit it processing
                         //the box is 554 pixels wide and 260 pixels tall and all the abilities need to fit into that
                         //Abilities also are split into a bolded title and a non bold body so those need to be drawn seperate
@@ -259,7 +266,7 @@ namespace Grimoire_Tactica_Card_Generator
                         {
                             //the first entry should be the Title of the Ability which is written on bold at the top
                             //this doesnt need wrapping so cramming it onto one line is fine
-                            canvas = Functions.Write_Text(canvas, abil[0], new Rectangle(Rect_X, Rect_Y, Card.ABILITY_WIDTH, Ability_Title_Height), false, Card.ABILITY_FONT, true, false);
+                            canvas = Functions.Write_Text(canvas, abil[0], new Rectangle(Rect_X, Rect_Y, Card.ABILITY_WIDTH, Ability_Title_Height), false, Card.ABILITY_FONT, true, false, Brushes.Black);
                             //now advance the Rect_Y posistion by the height of what was just written
                             Rect_Y += Ability_Title_Height;
                             //The body of the ability is stored in index 1 of the array and it does need to be written with text wrapping and with some words bolded
@@ -271,14 +278,49 @@ namespace Grimoire_Tactica_Card_Generator
                         //The flavourtext still needs to be written as wrapped rich text but since there will only ever be 1 body of it, drawing it is far simpler
                         Rectangle Flavour_Rectangle = new Rectangle(Rect_X, 983, Card.ABILITY_WIDTH, 30);
                         //Flavour Text has its own font and its always written itallic in a lighter shade to distinguish it
-                        canvas = Functions.Write_Rich_Text(canvas, c.Flavour_Text, Flavour_Rectangle, Card.FLAVOUR_FONT, false, true, Brushes.DarkSlateGray);
+                        canvas = Functions.Write_Rich_Text(canvas, c.Flavour_Text, Flavour_Rectangle, Card.FLAVOUR_FONT, false, true, Brushes.DarkGray);
                         //A small amount of work is needed to generate the string the identifies the card in the set
                         //since its a formatted version of the index + the string for the set ID passed as a parameter
                         //the index needs to be padded to be 
                         string Set_Code = $"{set}-{string.Format("{0:00000}", c.Index)}";
                         Rectangle Code_Rectangle = new Rectangle(84, 1022, 200, 20);
+                        //The cards rarity will also affect the colour that the set code is written in
+                        //Normally this would be a "using" statement but since the colour changes at runtime
+                        //I will have to manually dispose of the brush object
+                        SolidBrush Rarity_Brush;
+                        switch (c.Rarity.Trim())
+                        {
+                            //The rarity of the card determines the colour that the set code is drawn in
+                            //higher rarity have more of a metalic effect (gold, silver and bronze) whilst the more common
+                            //cards have red, blue and black 
+                            case "Legendary":
+                                //Legendary cards have gold writing
+                                Rarity_Brush = new SolidBrush(ColorTranslator.FromHtml("#FFD700"));
+                                break;
+                            case "Ultra":
+                                //Ultra cards have silver writing
+                                Rarity_Brush = new SolidBrush(ColorTranslator.FromHtml("#DFDFDF"));
+                                break;
+                            case "Super":
+                                //Super cards have bronze writing
+                                Rarity_Brush = new SolidBrush(ColorTranslator.FromHtml("#DA8A67"));
+                                break;
+                            case "Rare":
+                                //Rare cards have soviet red writing
+                                Rarity_Brush = new SolidBrush(ColorTranslator.FromHtml("#FF1A00"));
+                                break;
+                            case "Uncommon":
+                                //Uncommon Cards have patriot blue writing
+                                Rarity_Brush = new SolidBrush(ColorTranslator.FromHtml("#103A5D"));
+                                break;
+                            default:
+                                //By default common cards have black writing
+                                Rarity_Brush = new SolidBrush(Color.Black);
+                                break;
+                        }                        
                         //the code gets its own font since monospacing is important
-                        canvas = Functions.Write_Text(canvas, Set_Code, Code_Rectangle, false, Card.CODE_FONT, true, false);
+                        canvas = Functions.Write_Text(canvas, Set_Code, Code_Rectangle, true, Card.CODE_FONT, true, false, Rarity_Brush);
+                        Rarity_Brush.Dispose();
                         //The last section is to draw on the little image of the artists signature is to be drawn in the bottom 
                         //since this is again an image file we need to make sure it exist
                         if (File.Exists(c.Signature))

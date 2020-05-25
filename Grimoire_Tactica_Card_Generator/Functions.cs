@@ -237,7 +237,7 @@ namespace Grimoire_Tactica_Card_Generator
 
         //This will draw text to be as large as possible, in the font provided . in the middle of a rectangle
         //at a given posistion that is of a given size
-        public static Bitmap Write_Text(Bitmap i, string s, Rectangle r, bool centered, string font, bool bold, bool italic)
+        public static Bitmap Write_Text(Bitmap i, string s, Rectangle r, bool centered, string font, bool bold, bool italic, Brush b)
         {
             //Since we want to avoid out of bounds errors make sure the rectangle remains within the bounds of the bitmap
             //and only execute if it does
@@ -272,7 +272,7 @@ namespace Grimoire_Tactica_Card_Generator
                                 format.LineAlignment = StringAlignment.Center;
                             }
                             //and draw the text into place
-                            g.DrawString(s, f, Brushes.Black, r, format);
+                            g.DrawString(s, f, b, r, format);
                         }
                     }
                 }
@@ -540,7 +540,8 @@ namespace Grimoire_Tactica_Card_Generator
                     sw.WriteLine(Card.END_ABILITIES_STRING);
                     sw.WriteLine(c.Flavour_Text);
                     sw.WriteLine(c.Signature);
-                    sw.WriteLine(c.Artwork);                    
+                    sw.WriteLine(c.Artwork);
+                    sw.WriteLine(c.Rarity);
                     //This will then close the stream writer, freeing the file for use elsewhere
                 }
                 //and update the atached files name to match the cards name and title
