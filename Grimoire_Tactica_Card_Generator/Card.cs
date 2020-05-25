@@ -277,8 +277,8 @@ namespace Grimoire_Tactica_Card_Generator
                         }
                         //The flavourtext still needs to be written as wrapped rich text but since there will only ever be 1 body of it, drawing it is far simpler
                         Rectangle Flavour_Rectangle = new Rectangle(Rect_X, 983, Card.ABILITY_WIDTH, 30);
-                        //Flavour Text has its own font and its always written itallic in a lighter shade to distinguish it
-                        canvas = Functions.Write_Rich_Text(canvas, c.Flavour_Text, Flavour_Rectangle, Card.FLAVOUR_FONT, false, true, Brushes.DarkGray);
+                        //Flavour Text has its own font and its always written itallic in a dark shade of blue to distinguish it
+                        canvas = Functions.Write_Rich_Text(canvas, c.Flavour_Text, Flavour_Rectangle, Card.FLAVOUR_FONT, false, true, Brushes.MidnightBlue);
                         //A small amount of work is needed to generate the string the identifies the card in the set
                         //since its a formatted version of the index + the string for the set ID passed as a parameter
                         //the index needs to be padded to be 
@@ -303,7 +303,7 @@ namespace Grimoire_Tactica_Card_Generator
                                 break;
                             case "Super":
                                 //Super cards have bronze writing
-                                Rarity_Brush = new SolidBrush(ColorTranslator.FromHtml("#DA8A67"));
+                                Rarity_Brush = new SolidBrush(ColorTranslator.FromHtml("#CD7F32"));
                                 break;
                             case "Rare":
                                 //Rare cards have soviet red writing
@@ -319,7 +319,7 @@ namespace Grimoire_Tactica_Card_Generator
                                 break;
                         }                        
                         //the code gets its own font since monospacing is important
-                        canvas = Functions.Write_Text(canvas, Set_Code, Code_Rectangle, true, Card.CODE_FONT, true, false, Rarity_Brush);
+                        canvas = Functions.Write_Text(canvas, Set_Code, Code_Rectangle, false, Card.CODE_FONT, true, false, Rarity_Brush);
                         Rarity_Brush.Dispose();
                         //The last section is to draw on the little image of the artists signature is to be drawn in the bottom 
                         //since this is again an image file we need to make sure it exist
