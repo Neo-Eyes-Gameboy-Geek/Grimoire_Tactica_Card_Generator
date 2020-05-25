@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
@@ -365,6 +366,40 @@ namespace Grimoire_Tactica_Card_Generator
                                 Cursor_X += g.MeasureString($"{target} ", regf).Width;                               
                             }
                         }
+                    }
+                }
+            }
+            return i;
+        }
+
+        //This function outlines the area of a bit of plain text in black to help readability
+        public static Bitmap Outline_Text(Bitmap i, string s, Rectangle r, string font, bool bold, bool italic)
+        {
+            using(Graphics g = Graphics.FromImage(i))
+            {
+                //Make sure the graphics draw nice
+                g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                //Compositing Mode can't be set since string needs source over to be valid
+                g.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+                g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+                g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
+                //And an additional step to make sure text is proper anti-aliased and takes advantage
+                //of clear type as necessary
+                g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
+
+                //first we need to know how large the font is that we will outline
+                using (Font f = Generate_Font(s, font, r, bold, italic))
+                {
+                    int Outline_Size = (int)Math.Floor(f.Size);
+                    //now make a graphics path and add the string to it, in the given size
+                    using(GraphicsPath p = new GraphicsPath())
+                    {
+                        //This method wont support any sort of bolding or italics on the 
+                        //text so no need to set up the string format
+                        //Bold is only in place since this will only be used on the set code
+                        p.AddString(s, new FontFamily(font), (int)System.Drawing.FontStyle.Bold, Outline_Size, new PointF(r.X, r.Y), new StringFormat());
+                        //and draw the path in a black pen
+                        g.DrawPath(Pens.Black, p);
                     }
                 }
             }

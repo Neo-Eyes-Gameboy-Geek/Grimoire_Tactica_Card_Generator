@@ -277,13 +277,13 @@ namespace Grimoire_Tactica_Card_Generator
                         }
                         //The flavourtext still needs to be written as wrapped rich text but since there will only ever be 1 body of it, drawing it is far simpler
                         Rectangle Flavour_Rectangle = new Rectangle(Rect_X, 983, Card.ABILITY_WIDTH, 30);
-                        //Flavour Text has its own font and its always written itallic in a dark shade of blue to distinguish it
-                        canvas = Functions.Write_Rich_Text(canvas, c.Flavour_Text, Flavour_Rectangle, Card.FLAVOUR_FONT, false, true, Brushes.MidnightBlue);
+                        //Flavour Text has its own font and its always written itallic in a lighter font distinguish it
+                        canvas = Functions.Write_Rich_Text(canvas, c.Flavour_Text, Flavour_Rectangle, Card.FLAVOUR_FONT, false, true, Brushes.Black);
                         //A small amount of work is needed to generate the string the identifies the card in the set
                         //since its a formatted version of the index + the string for the set ID passed as a parameter
                         //the index needs to be padded to be 
                         string Set_Code = $"{set}-{string.Format("{0:00000}", c.Index)}";
-                        Rectangle Code_Rectangle = new Rectangle(84, 1022, 200, 20);
+                        Rectangle Code_Rectangle = new Rectangle(84, 1022, 200, 20);                        
                         //The cards rarity will also affect the colour that the set code is written in
                         //Normally this would be a "using" statement but since the colour changes at runtime
                         //I will have to manually dispose of the brush object
@@ -319,10 +319,16 @@ namespace Grimoire_Tactica_Card_Generator
                                 //By default common cards have black writing
                                 Rarity_Brush = new SolidBrush(Color.Black);
                                 break;
-                        }                        
+                        }
+                        //if the card isn't common it needs to have its code outlined in black to make it easier to read
+                        if(Rarity_Brush.Color != Color.Black)
+                        {
+                            //First outline the code in black so it is always readable regardless of colour
+                            canvas = Functions.Outline_Text(canvas, Set_Code, Code_Rectangle, Card.CODE_FONT, true, false);
+                        }
                         //the code gets its own font since monospacing is important
                         canvas = Functions.Write_Text(canvas, Set_Code, Code_Rectangle, false, Card.CODE_FONT, true, false, Rarity_Brush);
-                        Rarity_Brush.Dispose();
+                        Rarity_Brush.Dispose();                        
                         //The last section is to draw on the little image of the artists signature is to be drawn in the bottom 
                         //since this is again an image file we need to make sure it exist
                         if (File.Exists(c.Signature))
