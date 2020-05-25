@@ -279,7 +279,7 @@ namespace Grimoire_Tactica_Card_Generator
                         Rectangle Flavour_Rectangle = new Rectangle(Rect_X, 983, Card.ABILITY_WIDTH, 30);
                         //Flavour Text has its own font and its always written itallic in a lighter font and shade to distinguish it
                         //in this case a nice gray
-                        using(SolidBrush brush = new SolidBrush(ColorTranslator.FromHtml("#696969")))
+                        using(SolidBrush brush = new SolidBrush(ColorTranslator.FromHtml("#363636")))
                         {
                             canvas = Functions.Write_Rich_Text(canvas, c.Flavour_Text, Flavour_Rectangle, Card.FLAVOUR_FONT, false, true, brush);
                         }                        
