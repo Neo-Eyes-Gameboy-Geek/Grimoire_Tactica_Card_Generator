@@ -290,6 +290,8 @@ namespace Grimoire_Tactica_Card_Generator
                         SolidBrush Rarity_Brush;
                         switch (c.Rarity.Trim())
                         {
+                            //TODO add a method to these that lets me draw an outline around the text as it is drawn so nomatter
+                            //the colour it is visible
                             //The rarity of the card determines the colour that the set code is drawn in
                             //higher rarity have more of a metalic effect (gold, silver and bronze) whilst the more common
                             //cards have red, blue and black 
