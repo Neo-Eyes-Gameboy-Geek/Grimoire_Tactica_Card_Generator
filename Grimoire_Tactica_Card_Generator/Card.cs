@@ -211,7 +211,7 @@ namespace Grimoire_Tactica_Card_Generator
                         //And the card title
                         Rectangle Title_Rectangle = new Rectangle(204, 146, 504, 30);
                         //the title is written in the same font as the name just not as a bold
-                        canvas = Functions.Write_Text(canvas, c.Title, Title_Rectangle, true, Card.NAME_FONT, false, false, Brushes.Black);
+                        canvas = Functions.Write_Text(canvas, c.Title, Title_Rectangle, true, Card.NAME_FONT, true, false, Brushes.Black);
                         //keywords need a little processing to assemble the string we want to draw since it will be stored
                         //slightly more compactly that being drawn
                         //keywords are stored all together but compacted by a comma, we need that to become a space
@@ -339,15 +339,13 @@ namespace Grimoire_Tactica_Card_Generator
                         {
                             using(Bitmap sig = new Bitmap(c.Signature))
                             {
-                                //the width and height of the box is going to be less than or equal to 200x40 at least for now
-                                //this may be subject to change 
-                                //since the variable are used for basically the same purpose we can reuse Rect_X and Rect_Y
-                                //since they won't be used after this point
-                                Rect_X = Math.Min(sig.Width, 200);
-                                Rect_Y = Math.Min(sig.Height, 40);
+                                //the width and height of the box can be any size they want, as long as they stay in the cards area
+                                //the safe area that is, which starts at 75,75
+                                int Signature_Start_X = Math.Max(75, Card.Signature_X - sig.Width);
+                                int Signature_Start_Y = Math.Max(75, Card.Signature_Y - sig.Height);
                                 //We then draw the signature onto this rectangle in such a way that
                                 //it is right justified to the box it would be drawn in
-                                canvas = Functions.Overlay_Image(canvas, sig, new Rectangle(Card.Signature_X - Rect_X, Card.Signature_Y - Rect_Y, Rect_X, Rect_Y));                                
+                                canvas = Functions.Overlay_Image(canvas, sig, new Rectangle(Signature_Start_X, Signature_Start_Y, sig.Width, sig.Height));                                
                             }
                         }
                         //And like that all the information has been drawn to the card and we can safely return the image
