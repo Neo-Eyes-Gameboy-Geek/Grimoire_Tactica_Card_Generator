@@ -15,6 +15,8 @@ namespace Grimoire_Tactica_Card_Generator
         public const string END_ABILITIES_STRING = "<<End Abilities>>";
         //placeholder string for the correct format of an ability in the file should be in
         public const string ABILITY_FORMAT = "Title|Effect";
+        //This lists the type of cards, used to draw the card type icon on the left for quick reference
+        public static readonly string[] CARD_TYPES = { "Hero", "Character", "Equipment", "Location", "Event", "Ability", "Token" };
         //Constants for the size of a bleed and cropped card
         public const int BLEED_X = 825;
         public const int BLEED_Y = 1125;
@@ -221,7 +223,14 @@ namespace Grimoire_Tactica_Card_Generator
                         {
                             //now for each of these keys we add it trimmed of white space to the keywords string
                             keywords += $"[{key.Trim()}] ";
+                            //and if the keyword happens to be a card type keyword draw its icon
+                            if (Card.CARD_TYPES.Contains(key.Trim()))
+                            {
+                                Functions.Draw_Icon(canvas, key.Trim());
+                            }
                         }
+                        //and trim keywords to avoid drawing empty space
+                        keywords.Trim();
                         //keywords is then what we write to the card, with the same font as numbers but not bolded
                         Rectangle Keyword_Rectangle = new Rectangle(84, 670, 665, 40);
                         //and draw the keywords in 

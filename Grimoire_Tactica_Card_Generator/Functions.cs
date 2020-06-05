@@ -230,6 +230,49 @@ namespace Grimoire_Tactica_Card_Generator
                         Overlay_Image(i, b, new Rectangle(330, 604, 60, 60));
                     }
                     break;
+                //these cases are for the cards type "Hero", "Character", "Equipment", "Location", "Event", "Ability", "Token"
+                case "Hero":
+                    using (Bitmap b = new Bitmap(@".\Icons\CardTypes\Hero.png")) 
+                    {
+                        Overlay_Image(i, b, new Rectangle(84, 185, 65, 65));
+                    }
+                    break;
+                case "Character":
+                    using (Bitmap b = new Bitmap(@".\Icons\CardTypes\Character.png"))
+                    {
+                        Overlay_Image(i, b, new Rectangle(84, 185, 65, 65));
+                    }
+                    break;
+                case "Equipment":
+                    using (Bitmap b = new Bitmap(@".\Icons\CardTypes\Equipment.png"))
+                    {
+                        Overlay_Image(i, b, new Rectangle(84, 185, 65, 65));
+                    }
+                    break;
+                case "Location":
+                    using (Bitmap b = new Bitmap(@".\Icons\CardTypes\Location.png"))
+                    {
+                        Overlay_Image(i, b, new Rectangle(84, 185, 65, 65));
+                    }
+                    break;
+                case "Event":
+                    using (Bitmap b = new Bitmap(@".\Icons\CardTypes\Event.png"))
+                    {
+                        Overlay_Image(i, b, new Rectangle(84, 185, 65, 65));
+                    }
+                    break;
+                case "Ability":
+                    using (Bitmap b = new Bitmap(@".\Icons\CardTypes\Ability.png"))
+                    {
+                        Overlay_Image(i, b, new Rectangle(84, 185, 65, 65));
+                    }
+                    break;
+                case "Token":
+                    using (Bitmap b = new Bitmap(@".\Icons\CardTypes\Token.png"))
+                    {
+                        Overlay_Image(i, b, new Rectangle(84, 185, 65, 65));
+                    }
+                    break;
                 default:
                     break;
             }
