@@ -234,43 +234,43 @@ namespace Grimoire_Tactica_Card_Generator
                 case "Hero":
                     using (Bitmap b = new Bitmap(@".\Icons\CardTypes\Hero.png")) 
                     {
-                        Overlay_Image(i, b, new Rectangle(84, 185, 65, 65));
+                        Overlay_Image(i, b, new Rectangle(84, 84, 90, 90));
                     }
                     break;
                 case "Character":
                     using (Bitmap b = new Bitmap(@".\Icons\CardTypes\Character.png"))
                     {
-                        Overlay_Image(i, b, new Rectangle(84, 185, 65, 65));
+                        Overlay_Image(i, b, new Rectangle(84, 84, 90, 90));
                     }
                     break;
                 case "Equipment":
                     using (Bitmap b = new Bitmap(@".\Icons\CardTypes\Equipment.png"))
                     {
-                        Overlay_Image(i, b, new Rectangle(84, 185, 65, 65));
+                        Overlay_Image(i, b, new Rectangle(84, 84, 90, 90));
                     }
                     break;
                 case "Location":
                     using (Bitmap b = new Bitmap(@".\Icons\CardTypes\Location.png"))
                     {
-                        Overlay_Image(i, b, new Rectangle(84, 185, 65, 65));
+                        Overlay_Image(i, b, new Rectangle(84, 84, 90, 90));
                     }
                     break;
                 case "Event":
                     using (Bitmap b = new Bitmap(@".\Icons\CardTypes\Event.png"))
                     {
-                        Overlay_Image(i, b, new Rectangle(84, 185, 65, 65));
+                        Overlay_Image(i, b, new Rectangle(84, 84, 90, 90));
                     }
                     break;
                 case "Ability":
                     using (Bitmap b = new Bitmap(@".\Icons\CardTypes\Ability.png"))
                     {
-                        Overlay_Image(i, b, new Rectangle(84, 185, 65, 65));
+                        Overlay_Image(i, b, new Rectangle(84, 84, 90, 90));
                     }
                     break;
                 case "Token":
                     using (Bitmap b = new Bitmap(@".\Icons\CardTypes\Token.png"))
                     {
-                        Overlay_Image(i, b, new Rectangle(84, 185, 65, 65));
+                        Overlay_Image(i, b, new Rectangle(84, 84, 90, 90));
                     }
                     break;
                 default:

@@ -203,10 +203,7 @@ namespace Grimoire_Tactica_Card_Generator
                         }
                         //Now we write the text in place, most of it is plain text with only
                         //the abilities, which need extra processing any way, that are rich text
-                        //May as well start from top left through to bottom right
-                        //The rectangle the cost of the card appears in
-                        Rectangle Cost_Rectangle = new Rectangle(84, 84, 90, 90);
-                        canvas = Functions.Write_Text(canvas, c.Cost, Cost_Rectangle, true, Card.NUMBER_FONT, true, false, Brushes.Black);
+                        //May as well start from top left through to bottom right                        
                         //Rectangle for the main name of the card to appear in
                         Rectangle Name_Rectangle = new Rectangle(204, 81, 504, 60);
                         canvas = Functions.Write_Text(canvas, c.Name, Name_Rectangle, true, Card.NAME_FONT, true, false, Brushes.Black);
@@ -235,6 +232,9 @@ namespace Grimoire_Tactica_Card_Generator
                         Rectangle Keyword_Rectangle = new Rectangle(84, 670, 665, 40);
                         //and draw the keywords in 
                         canvas = Functions.Write_Text(canvas, keywords, Keyword_Rectangle, true, Card.NUMBER_FONT, true, false, Brushes.Black);
+                        //The rectangle the cost of the card appears in, do this after keywords so the type icon is drawn under the cost text
+                        Rectangle Cost_Rectangle = new Rectangle(84, 84, 90, 90);
+                        canvas = Functions.Write_Text(canvas, c.Cost, Cost_Rectangle, true, Card.NUMBER_FONT, true, false, Brushes.Black);
                         //HP, ATK and DEF all follow basically the same pattern, just the box they are in changes
                         Rectangle HP_Rectangle = new Rectangle(84, 721, 90, 90);
                         canvas = Functions.Write_Text(canvas, c.HP, HP_Rectangle, true, Card.NUMBER_FONT, true, false, Brushes.Black);
