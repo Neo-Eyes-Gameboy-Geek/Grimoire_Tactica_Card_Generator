@@ -25,14 +25,16 @@ namespace Grimoire_Tactica_Card_Generator
         public const int ABILITY_WIDTH = 554;
         public const int ABILITY_HEIGHT = 260;
         //and the bottom right corner where the artists signature finishes so it can be right justified
-        public const int Signature_X = 739;
-        public const int Signature_Y = 1041;
+        public const int Signature_X = 740;
+        public const int Signature_Y = 1043;
         //Constants for the font families used on the cards
         public const string NAME_FONT = "Courier New";
         public const string NUMBER_FONT = "Courier New";
         public const string ABILITY_FONT = "Courier New";
         public const string FLAVOUR_FONT = "Courier New";
         public const string CODE_FONT = "Courier New";
+        //And a constant for the deafault overlay
+        public const string DEFAULT_OVERLAY = @".\Overlays\Overlay.png";
         //Data Fields, All Strings for ease of use
         public string Name { get; set; }
         public string Title { get; set; }
@@ -164,7 +166,7 @@ namespace Grimoire_Tactica_Card_Generator
         }
 
         //Produces a full bleed card image from the card data provided
-        public static Bitmap Generate_Bleed_Image(Card c, string set)
+        public static Bitmap Generate_Bleed_Image(Card c, string set, string boxes)
         {
             //this is the bitmap that will actually be returned
             Bitmap canvas;
@@ -185,11 +187,12 @@ namespace Grimoire_Tactica_Card_Generator
                         //psd file used to make the card layout in the first place, so changes there will
                         //need changes here but no more than having a mountain of constants in the class
                         //Next step is to overlay the textboxes onto the freshly resized artwork
-                        //these textboxes are compiled with the project as an image
-                        using(Bitmap overlay = new Bitmap(@".\Overlays\Overlay.png"))
+                        //these textboxes are compiled with the project as an image but are picked
+                        //from at run time
+                        using(Bitmap overlay = new Bitmap(boxes))
                         {
                             //draw the textboxes into place on the card
-                            canvas = Functions.Overlay_Image(canvas, overlay, new Rectangle(79, 79, 665, 965));
+                            canvas = Functions.Overlay_Image(canvas, overlay, new Rectangle(80, 80, 665, 965));
                         }
                         //Next up we need to draw the icons in place, there can be more than 1 so we need to split the string up
                         //and draw every one that occurs
@@ -205,10 +208,10 @@ namespace Grimoire_Tactica_Card_Generator
                         //the abilities, which need extra processing any way, that are rich text
                         //May as well start from top left through to bottom right                        
                         //Rectangle for the main name of the card to appear in
-                        Rectangle Name_Rectangle = new Rectangle(204, 81, 504, 60);
+                        Rectangle Name_Rectangle = new Rectangle(205, 82, 504, 60);
                         canvas = Functions.Write_Text(canvas, c.Name, Name_Rectangle, true, Card.NAME_FONT, true, false, Brushes.Black);
                         //And the card title
-                        Rectangle Title_Rectangle = new Rectangle(204, 146, 504, 30);
+                        Rectangle Title_Rectangle = new Rectangle(205, 147, 504, 30);
                         //the title is written in the same font as the name just not as a bold
                         canvas = Functions.Write_Text(canvas, c.Title, Title_Rectangle, true, Card.NAME_FONT, true, false, Brushes.Black);
                         //keywords need a little processing to assemble the string we want to draw since it will be stored
@@ -229,18 +232,18 @@ namespace Grimoire_Tactica_Card_Generator
                         //and trim keywords to avoid drawing empty space
                         keywords.Trim();
                         //keywords is then what we write to the card, with the same font as numbers but not bolded
-                        Rectangle Keyword_Rectangle = new Rectangle(84, 670, 665, 40);
+                        Rectangle Keyword_Rectangle = new Rectangle(85, 671, 665, 40);
                         //and draw the keywords in 
                         canvas = Functions.Write_Text(canvas, keywords, Keyword_Rectangle, true, Card.NUMBER_FONT, true, false, Brushes.Black);
                         //The rectangle the cost of the card appears in, do this after keywords so the type icon is drawn under the cost text
-                        Rectangle Cost_Rectangle = new Rectangle(84, 84, 90, 90);
+                        Rectangle Cost_Rectangle = new Rectangle(85, 85, 90, 90);
                         canvas = Functions.Write_Text(canvas, c.Cost, Cost_Rectangle, true, Card.NUMBER_FONT, true, false, Brushes.Black);
                         //HP, ATK and DEF all follow basically the same pattern, just the box they are in changes
-                        Rectangle HP_Rectangle = new Rectangle(84, 721, 90, 90);
+                        Rectangle HP_Rectangle = new Rectangle(85, 722, 90, 90);
                         canvas = Functions.Write_Text(canvas, c.HP, HP_Rectangle, true, Card.NUMBER_FONT, true, false, Brushes.Black);
-                        Rectangle ATK_Rectangle = new Rectangle(84, 822, 90, 90);
+                        Rectangle ATK_Rectangle = new Rectangle(85, 823, 90, 90);
                         canvas = Functions.Write_Text(canvas, c.ATK, ATK_Rectangle, true, Card.NUMBER_FONT, true, false, Brushes.Black);
-                        Rectangle DEF_Rectangle = new Rectangle(84, 923, 90, 90);
+                        Rectangle DEF_Rectangle = new Rectangle(85, 924, 90, 90);
                         canvas = Functions.Write_Text(canvas, c.DEF, DEF_Rectangle, true, Card.NUMBER_FONT, true, false, Brushes.Black);
                         //Abilities due to their varied number in a fixed box require a little bit it processing
                         //the box is 554 pixels wide and 260 pixels tall and all the abilities need to fit into that
@@ -268,8 +271,8 @@ namespace Grimoire_Tactica_Card_Generator
                         int Ability_Title_Height = Ability_Box_Height / 4;
                         int Ability_Body_Height = Ability_Box_Height - Ability_Title_Height;
                         //Since all of these need to be drawn to rectangles we need values to track where the top of the rectangles go
-                        int Rect_X = 185;
-                        int Rect_Y = 721;
+                        int Rect_X = 186;
+                        int Rect_Y = 722;
                         //now draw each of these abilities 
                         foreach(string[] abil in Valid_Ability_List)
                         {
@@ -285,7 +288,7 @@ namespace Grimoire_Tactica_Card_Generator
                             Rect_Y += Ability_Body_Height;
                         }
                         //The flavourtext still needs to be written as wrapped rich text but since there will only ever be 1 body of it, drawing it is far simpler
-                        Rectangle Flavour_Rectangle = new Rectangle(Rect_X, 983, Card.ABILITY_WIDTH, 30);
+                        Rectangle Flavour_Rectangle = new Rectangle(Rect_X, 984, Card.ABILITY_WIDTH, 30);
                         //Flavour Text has its own font and its always written itallic in a lighter font and shade to distinguish it
                         //in this case a nice gray
                         using(SolidBrush brush = new SolidBrush(ColorTranslator.FromHtml("#363636")))
@@ -296,7 +299,7 @@ namespace Grimoire_Tactica_Card_Generator
                         //since its a formatted version of the index + the string for the set ID passed as a parameter
                         //the index needs to be padded to be 
                         string Set_Code = $"{set}-{string.Format("{0:00000}", c.Index)}";
-                        Rectangle Code_Rectangle = new Rectangle(84, 1022, 200, 20);                        
+                        Rectangle Code_Rectangle = new Rectangle(85, 1023, 200, 20);                        
                         //The cards rarity will also affect the colour that the set code is written in
                         //Normally this would be a "using" statement but since the colour changes at runtime
                         //I will have to manually dispose of the brush object
@@ -350,8 +353,8 @@ namespace Grimoire_Tactica_Card_Generator
                             {
                                 //the width and height of the box can be any size they want, as long as they stay in the cards area
                                 //the safe area that is, which starts at 75,75
-                                int Signature_Start_X = Math.Max(75, Card.Signature_X - sig.Width);
-                                int Signature_Start_Y = Math.Max(75, Card.Signature_Y - sig.Height);
+                                int Signature_Start_X = Math.Max(80, Card.Signature_X - sig.Width);
+                                int Signature_Start_Y = Math.Max(80, Card.Signature_Y - sig.Height);
                                 //We then draw the signature onto this rectangle in such a way that
                                 //it is right justified to the box it would be drawn in
                                 canvas = Functions.Overlay_Image(canvas, sig, new Rectangle(Signature_Start_X, Signature_Start_Y, sig.Width, sig.Height));                                
@@ -379,12 +382,12 @@ namespace Grimoire_Tactica_Card_Generator
         }
 
         //Produce a card image without the bleed from a provided card
-        public static Bitmap Generate_Cropped_Image(Card c,string set)
+        public static Bitmap Generate_Cropped_Image(Card c,string set, string boxes)
         {
             //To keep the method simple delegate most of the work to generate bleed image as it saves a lot of 
             //code duplication
             Bitmap cc;
-            using(Bitmap b = Generate_Bleed_Image(c, set))
+            using(Bitmap b = Generate_Bleed_Image(c, set, boxes))
             {
                 //we simply crop it down to the size needed 
                 cc = Functions.Crop_Image(b, Card.CROPPED_X, Card.CROPPED_Y);

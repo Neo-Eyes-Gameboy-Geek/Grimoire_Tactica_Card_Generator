@@ -277,8 +277,8 @@ namespace Grimoire_Tactica_Card_Generator
                 //then from the selected card generate a cropped image from the card selected 
                 Card c = (Card)((ComboBoxItem)CMB_Card_Selector.SelectedItem).Tag;
                 BitmapImage i;
-                //now make a new image source 
-                using (Bitmap b = Card.Generate_Cropped_Image(c, "PREVIEW"))
+                //now make a new image source with standard boxes
+                using (Bitmap b = Card.Generate_Cropped_Image(c, "PREVIEW", @".\Overlays\Overlay.png"))
                 {                    
                     using(MemoryStream mem = new MemoryStream())
                     {
@@ -317,11 +317,23 @@ namespace Grimoire_Tactica_Card_Generator
                 {
                     //We obviously only continue if they dont cancel the dialog
                     set_code = input.Answer();
+                    //we also need to pick the overlay boxes we are using 
                     //we need the list of cards out of selected item
                     List<Card> set = ((Set_Info)(((ComboBoxItem)(CMB_Set_Selector.SelectedItem)).Tag)).cards;
                     //we also need to make a bleed folder for the images if they dont exist
                     string Bleed_Directory = ((Set_Info)(((ComboBoxItem)(CMB_Set_Selector.SelectedItem)).Tag)).dir + @"\Bleed";
                     Directory.CreateDirectory(Bleed_Directory);
+                    //we also need an overlay to use, user can pick but just in case have a default selected
+                    string overlay = Card.DEFAULT_OVERLAY;
+                    //but give the user a choice 
+                    OpenFileDialog dialog = new OpenFileDialog();
+                    //wherever it opens is fine but set a file filter
+                    dialog.Filter = "Image Files (*.png;*.jpg;*.jpeg;*.bmp)|*.png;*.jpg;*.jpeg;*.bmp|All Files (*.*)|*.*";
+                    if (dialog.ShowDialog() == true)
+                    {
+                        //if they selected one set it as the new overlay
+                        overlay = dialog.FileName;
+                    }
                     //now for sake of efficiency we will generate and save the cards in a parrallel fashion
                     //The limit of 8 concurrent tasks is mostly to avoid out of memory issues since in a stress
                     //situation each iteration can use up to a gig of memory each so not bounding how many
@@ -329,7 +341,7 @@ namespace Grimoire_Tactica_Card_Generator
                     //if you arent throwing massive images at it constantly
                     Parallel.ForEach(set,new ParallelOptions {MaxDegreeOfParallelism = 12 }, c =>
                     {
-                        using (Bitmap b = Card.Generate_Bleed_Image(c, set_code))
+                        using (Bitmap b = Card.Generate_Bleed_Image(c, set_code, overlay))
                         {
                             //The encoder needs some set up to function properly
                             string s = string.Format("{0:00000}", c.Index);
@@ -371,9 +383,20 @@ namespace Grimoire_Tactica_Card_Generator
                     //situation each iteration can use up to a gig of memory each so not bounding how many
                     //could cause some problems, this still will on lower end systems but shouldn't be an issue
                     //if you arent throwing massive images at it constantly
+                    //We also need to know the overlay to use , although set a default, just in case
+                    string overlay = Card.DEFAULT_OVERLAY;
+                    //but give the user a choice 
+                    OpenFileDialog dialog = new OpenFileDialog();
+                    //wherever it opens is fine but set a file filter
+                    dialog.Filter = "Image Files (*.png;*.jpg;*.jpeg;*.bmp)|*.png;*.jpg;*.jpeg;*.bmp|All Files (*.*)|*.*";
+                    if(dialog.ShowDialog() == true)
+                    {
+                        //if they selected one set it as the new overlay
+                        overlay = dialog.FileName;
+                    }
                     Parallel.ForEach(set, new ParallelOptions { MaxDegreeOfParallelism = 12 }, c =>
                     {
-                        using (Bitmap b = Card.Generate_Cropped_Image(c, set_code))
+                        using (Bitmap b = Card.Generate_Cropped_Image(c, set_code, overlay))
                         {
                             //The encoder needs some set up to function properly
                             string s = string.Format("{0:00000}", c.Index);
