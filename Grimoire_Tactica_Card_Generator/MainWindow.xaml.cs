@@ -327,15 +327,17 @@ namespace Grimoire_Tactica_Card_Generator
                     string overlay = Card.DEFAULT_OVERLAY;
                     //but give the user a choice 
                     OpenFileDialog dialog = new OpenFileDialog();
-                    //wherever it opens is fine but set a file filter
+                    //set a file filter
                     dialog.Filter = "Image Files (*.png;*.jpg;*.jpeg;*.bmp)|*.png;*.jpg;*.jpeg;*.bmp|All Files (*.*)|*.*";
+                    //and make sure it opens wherever the program is for access to the overlays folder
+                    dialog.InitialDirectory = $@"{Directory.GetCurrentDirectory()}\Overlays";
                     if (dialog.ShowDialog() == true)
                     {
                         //if they selected one set it as the new overlay
                         overlay = dialog.FileName;
                     }
                     //now for sake of efficiency we will generate and save the cards in a parrallel fashion
-                    //The limit of 8 concurrent tasks is mostly to avoid out of memory issues since in a stress
+                    //The limit of 12 concurrent tasks is mostly to avoid out of memory issues since in a stress
                     //situation each iteration can use up to a gig of memory each so not bounding how many
                     //could cause some problems, this still will on lower end systems but shouldn't be an issue
                     //if you arent throwing massive images at it constantly
@@ -387,9 +389,10 @@ namespace Grimoire_Tactica_Card_Generator
                     string overlay = Card.DEFAULT_OVERLAY;
                     //but give the user a choice 
                     OpenFileDialog dialog = new OpenFileDialog();
-                    //wherever it opens is fine but set a file filter
+                    //set a file filter
                     dialog.Filter = "Image Files (*.png;*.jpg;*.jpeg;*.bmp)|*.png;*.jpg;*.jpeg;*.bmp|All Files (*.*)|*.*";
-                    if(dialog.ShowDialog() == true)
+                    dialog.InitialDirectory = $@"{Directory.GetCurrentDirectory()}\Overlays";
+                    if (dialog.ShowDialog() == true)
                     {
                         //if they selected one set it as the new overlay
                         overlay = dialog.FileName;
