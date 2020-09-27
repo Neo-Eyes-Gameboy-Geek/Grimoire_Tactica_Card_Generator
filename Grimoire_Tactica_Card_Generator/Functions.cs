@@ -619,6 +619,9 @@ namespace Grimoire_Tactica_Card_Generator
                     sw.WriteLine(c.Flavour_Text);
                     sw.WriteLine(c.Signature);
                     sw.WriteLine(c.Artwork);
+                    sw.WriteLine(c.Art_Corner.X.ToString());
+                    sw.WriteLine(c.Art_Corner.Y.ToString());
+                    sw.WriteLine(c.Art_Scale.ToString());
                     sw.WriteLine(c.Rarity);
                     //This will then close the stream writer, freeing the file for use elsewhere
                 }

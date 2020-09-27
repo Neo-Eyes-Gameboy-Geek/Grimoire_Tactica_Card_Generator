@@ -154,6 +154,22 @@ namespace Grimoire_Tactica_Card_Generator
                         c.Artwork = s.ReadLine().Trim();
                     }
 
+                    //The artwork also has a window and scale factor now
+                    if (!s.EndOfStream)
+                    {
+                        //the x and y coordinates are stored as strings one after the other just after the artwork 
+                        float Window_X = float.Parse(s.ReadLine().Trim());
+                        float Window_Y = float.Parse(s.ReadLine().Trim());
+                        //now use these points to make a new point for the artwork
+                        c.Art_Corner = new PointF(Window_X, Window_Y);
+                    }
+
+                    //with the scale factor being just after that
+                    if (!s.EndOfStream)
+                    {
+                        c.Art_Scale = int.Parse(s.ReadLine().Trim());
+                    }
+
                     if (!s.EndOfStream)
                     {
                         c.Rarity = s.ReadLine().Trim();
