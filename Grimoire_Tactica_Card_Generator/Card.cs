@@ -49,6 +49,10 @@ namespace Grimoire_Tactica_Card_Generator
         //These last 2 are file paths, to a signature from the artist and the artwork itself
         public string Signature { get; set; }
         public string Artwork { get; set; }
+        //Artwork also has a point associated with it to indicate the (x,y) coordinate the crop should start
+        public PointF Art_Corner { get; set; }
+        //and a scale multiplier to indicate how big of a window it uses
+        public int Art_Scale { get; set; }
         //and one for rarity, to affect the set list colour
         public string Rarity { get; set; }
         //Lastly this is just the path to the text file this will all be stored in, this should in theory not change

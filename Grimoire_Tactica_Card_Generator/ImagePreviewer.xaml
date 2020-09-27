@@ -1,0 +1,28 @@
+﻿<Window x:Class="Grimoire_Tactica_Card_Generator.ImagePreviewer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Grimoire_Tactica_Card_Generator"
+        mc:Ignorable="d"
+        Title="ImagePreviewer" Height="720" Width="1280">
+    <Grid>
+        <!--Setup the grid first-->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="14*"/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <!--First we have the headliner, the full image that the user selects from-->
+        <!--Set in a canvas so i can freely drag a rectangle around in it-->
+        <Viewbox x:Name="VIB_Whole_Image_Canvas" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="1" Grid.RowSpan="3" Stretch="Uniform">
+            <Image x:Name="IMG_Whole_Image" HorizontalAlignment="Center" VerticalAlignment="Center" UseLayoutRounding="True"  Source="E:\Patreon\NeoArtCore\August_2020\Hana Uzaki_lingerie.jpg"/>
+        </Viewbox>
+        <!--Across from this is the image window showing the chunk of image that will be used for the artwork-->
+    </Grid>
+</Window>

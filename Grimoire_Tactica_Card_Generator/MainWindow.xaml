@@ -51,7 +51,7 @@
         <Button x:Name="BTN_Save_Card" Grid.Column="5" Grid.Row="2" Grid.ColumnSpan="1" Grid.RowSpan="1" Content="Save Card" Click="BTN_Save_Card_Click"/>
 
         <!--The Image frame for the card preview Need to make sure it rounds the values so to get better appearance-->
-        <Image x:Name="IMG_Card_Preview" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="1" Grid.RowSpan="15" HorizontalAlignment="Center" VerticalAlignment="Center" UseLayoutRounding="True"/>
+        <Image x:Name="IMG_Card_Preview" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="1" Grid.RowSpan="15" HorizontalAlignment="Center" VerticalAlignment="Center" UseLayoutRounding="True" Stretch="Uniform"/>
         
         <!--These are the TextBoxes that will hold all the data fields of the card-->
         <!--First is the cards name and title-->
