@@ -448,7 +448,7 @@ namespace Grimoire_Tactica_Card_Generator
             {
                 //set the artists signature path as the path to the selected file
                 string Absolute_Path = dialog.FileName;
-                TBX_Artwork_Path.Text = Absolute_Path;
+                TBX_Artwork_Path.Text = Absolute_Path;               
             }
             //and now all that is done update the current card
             Static_Methods_Container.Update_Current_Card(this);
