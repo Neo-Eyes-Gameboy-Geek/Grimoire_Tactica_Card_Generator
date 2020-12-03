@@ -505,7 +505,7 @@ namespace Grimoire_Tactica_Card_Generator
             return new Font("Comic Sans", 12, GraphicsUnit.Point);
         }
 
-        //A function overload of the above that makes the dont, wrapped to the given width rather than all on 1 line
+        //A function overload of the above that makes the font, wrapped to the given width rather than all on 1 line
         public static Font Generate_Font(string s, string font_family, Rectangle r, bool bold, bool italic, int width)
         {
             //First things first, the font can't be of a size larger than the rectangle in pixels so 
